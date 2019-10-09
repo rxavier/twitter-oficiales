@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+tweepy = "==3.8.0"
+pandas = "==0.25.1"
+plotnine = "==0.6.0"
+jupyter = "*"
+
+[requires]
+python_version = "3.7"
