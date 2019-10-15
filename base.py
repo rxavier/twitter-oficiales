@@ -65,7 +65,7 @@ def get_data(user_list, num_items=1000, data=None, save=True, forward=True):
     return output
 
 
-def mungle_plot(data_df, users=USERS, aggregation="7D"):
+def mungle_plot(data_df, users=USERS, aggregation="7D", start="2018-12-31", end=None):
 
     data = data_df.sort_values(["User", "Date"])
     data.drop_duplicates(subset=["User", "Tweet"], inplace=True)
@@ -73,7 +73,7 @@ def mungle_plot(data_df, users=USERS, aggregation="7D"):
                         "Favorites": "int", "Type": "category"})
     data["Date"] = data["Date"]-dt.timedelta(hours=3)
 
-    filtered_data = data.loc[(data.Date >= "2018-12-30") & (data.Type == "Tweet")].loc[data.User.isin(users)]
+    filtered_data = data.loc[(data.Type == "Tweet")].loc[data.User.isin(users)]
     data_sums = (filtered_data.groupby("User").
                  apply(lambda x: x.set_index("Date").resample("1D").sum().
                        reindex(pd.date_range(dt.datetime(2018, 12, 30), data.max()["Date"], freq="D"))).
@@ -90,6 +90,11 @@ def mungle_plot(data_df, users=USERS, aggregation="7D"):
                       resample(aggregation, label="right", closed="right").sum())
 
     agg_data = resampled_data.groupby("Date").agg("sum").reset_index()
+
+    if end is None:
+        end = agg_data.Date.max()
+
+    agg_data = agg_data.loc[(agg_data.Date >= start) & (agg_data.Date <= end)]
 
     plot = (p9.ggplot(agg_data, p9.aes("Date", "Tweet")) +
             p9.geom_line() + p9.theme(axis_text_x=p9.element_text(rotation=90, hjust=1)))
