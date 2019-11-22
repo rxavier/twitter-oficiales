@@ -99,6 +99,7 @@ def mungle_plot(data_df, users=USERS, aggregation="7D", start="2018-12-31", end=
     plot = (p9.ggplot(agg_data, p9.aes("Date", "Tweet")) +
             p9.geom_line(color="red", size=1) +
             p9.geom_vline(xintercept="2019-06-30", linetype="dotted") +
+            p9.geom_vline(xintercept="2019-10-27", linetype="dotted") +
             p9.theme(axis_text_x=p9.element_text(angle=90, hjust=-1)) +
             p9.labs(title="Tweets de cuentas oficiales del gobierno en 2019",
                     subtitle="Acumulados semanales",
