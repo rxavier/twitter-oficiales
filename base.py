@@ -11,9 +11,9 @@ auth = tweepy.OAuthHandler(keys["consumer_token"], keys["consumer_token_secret"]
 auth.set_access_token(keys["access_token"], keys["access_token_secret"])
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-USERS = ["SCPresidenciauy", "oppuruguay", "MRREE_Uruguay", "MGAPUruguay", "MDN_Uruguay", "Mvotma_Uruguay", "midesuy",
-         "MIEM_Uruguay", "MI_UNICOM", "mef_Uruguay", "Uruguay_Natural", "MEC_Uruguay", "MSPUruguay", "MTSSuy", "mtopuy",
-         "ASSEcomunica", "ANEP_Uruguay", "Udelaruy"]
+USERS = ["SCPresidenciauy", "oppuruguay", "1500Opp", "MRREE_Uruguay", "MGAPUruguay", "MDN_Uruguay", "Mvotma_Uruguay",
+         "midesuy", "MIEM_Uruguay", "MI_UNICOM", "mef_Uruguay", "Uruguay_Natural", "MEC_Uruguay", "MSPUruguay",
+         "MTSSuy", "mtopuy", "ASSEcomunica", "ANEP_Uruguay", "Udelaruy"]
 
 
 def get_data(user_list, num_items=1000, data=None, save=True, forward=True):
